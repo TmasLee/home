@@ -6,7 +6,7 @@ var projects = [
     'project' : CodeChallenge,
     'name' : 'Code Challenge',
     'topics' : 'Async, GraphQL, API, Closure',
-    'description': 'A small code challenge I found to be interesting due to closure. An algorithm was provided to calculate the win change of each ant. The algorithm took a randomly generated amount of time to output an answer. By grabbing data from a GraphQL API, I was to display each ants properties as the win chances came in.'
+    'description': 'A small code challenge I found to be interesting due to closure. An algorithm was provided to calculate the win chance of each ant. The algorithm took a randomly generated amount of time to output an answer. By grabbing data from a GraphQL API, I was to display each ants properties as the win chances came in.'
   },
   {
     'project' : Snake,
