@@ -5,7 +5,7 @@ class Home extends Component {
     return (
       <div>
         <br/>
-        <img src={require('./images/face.JPG')} alt='face' className='rounded-circle'/>
+        <img src={require('./images/face.jpg')} alt='face' className='rounded-circle'/>
         <br/><br/>
         <p className='lead'>Hi, welcome to my portfolio!</p>
         <p>If you're looking for a web developer (or someone) who is motivated and always

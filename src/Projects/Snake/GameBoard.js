@@ -32,6 +32,7 @@ class GameBoard extends Component {
     this.context = this.refs.canvas.getContext('2d');
 
     this.refs.canvas.addEventListener('keydown', (e) => {
+      e.preventDefault();
       switch(e.keyCode){
         case 37: //left
           if (this.state.xVel > 0){
