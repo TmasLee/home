@@ -17,7 +17,7 @@ class About extends Component {
         </p>
         <br/>
         <p className='text-center'>Although I was initially interested in studying chemistry, I decided 
-        to take programming courses in college. Although it was difficult to learn both a new skill
+        to take programming courses in college. While it was difficult to learn both a new skill
         and a way of thinking, it was then that I realized that I enjoyed coding as much as I had enjoyed learning
         chemistry. Ever since, coding became a passion. </p>
         <br/>
