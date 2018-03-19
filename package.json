@@ -25,5 +25,5 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://sendmebiscuits.github.io/portfolio"
+  "homepage": "https://sendmebiscuits.github.io/home"
 }
