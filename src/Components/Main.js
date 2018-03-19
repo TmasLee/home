@@ -15,12 +15,12 @@ class Main extends Component {
       <BrowserRouter>
         <div>
           <ul className='nav nav-tabs justify-content-center'>
-            <li className='nav-item'><NavLink className='nav-link' exact to='/'>Home</NavLink></li>
+            <li className='nav-item'><NavLink className='nav-link' exact to='/home'>Home</NavLink></li>
             <li className='nav-item'><NavLink className='nav-link' to='/aboutme'>About Me</NavLink></li>
             <li className='nav-item'><NavLink className='nav-link' to='/portfolio'>Portfolio</NavLink></li>
           </ul>
           <div className='container'>
-            <Route exact path='/' component={Home}/>
+            <Route exact path='/home' component={Home}/>
             <Route path='/aboutme' component={About}/>
             <Route path='/portfolio' component={Portfolio}/>
           </div>
