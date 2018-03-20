@@ -12,7 +12,7 @@ class App extends Component {
           <div className='border'>
           <div className='col-md'>
             <div className="App">
-              <div className='page-header'>
+              <div className='page-header bgcolor2'>
                 <div className='header-color'>
                   <a href='https://github.com/sendmebiscuits'>
                     https://github.com/sendmebiscuits
