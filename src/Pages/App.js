@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import '../App.css';
-import Background from '../Components/Background';
 import Main from '../Components/Main';
+// import Dropdown from '../Components/Dropdown';
+import '../App.css';
 
 class App extends Component {
 
   render() {
     return (
-      <div>
-        <Background/>
+      <div className='bgcolor'>
         <div className='container'>
           <div className='border'>
           <div className='col-md'>

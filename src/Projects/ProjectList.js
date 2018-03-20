@@ -1,5 +1,6 @@
 import CodeChallenge from './CodeChallenge/CodeChallenge';
 import Snake from './Snake/SnakeGame';
+import Background from './ColorShift/Background';
 
 var projects = [
   {
@@ -10,9 +11,15 @@ var projects = [
   },
   {
     'project' : Snake,
-    'name' : 'ReactSnake ',
+    'name' : 'ReactSnake',
     'topics' : 'Javascript, Problem Solving',
-    'description' : 'The classic Snake game implemented using React components and HTML canvas. I went for an algorithm that would be most efficient in terms of number of operations (big O).'
+    'description' : 'The classic Snake game implemented using React components and HTML canvas. I went for an algorithm that would be simple while keeping big O in mind.'
+  },
+  {
+    'project' : Background,
+    'name' : 'Color Shifting Canvas',
+    'topics' : 'HTML canvas, Closure',
+    'description' : 'While creating a shifting color background was easy to do in CSS, I decided to implement something similar in Javascript.'
   }
 ];
 

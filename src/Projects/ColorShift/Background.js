@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 
-var height = window.innerHeight,
-    width = window.innerWidth;
+var height = 300,
+    width = 300;
 
 class Background extends Component {
-
   componentDidMount(){
     this.t = 0;
-    this.run();
+    this.loop();
   }
 
   color(x,y,r,g,b){
@@ -28,9 +27,14 @@ class Background extends Component {
     return( Math.floor(192 + 64*Math.sin( 5*Math.sin(t/9) + ((x-100)*(x-100)+(y-100)*(y-100))/1100) ));
   }
 
-  run(){
+  loop(){
     var self = this; 
     function animate(){
+
+      if (self.refs.background === undefined){
+        return;
+      }
+
       for (var x = 0; x <= 35; x++){
         for (var y = 0; y <= 35; y++){
           self.color(x, y, self.R(x,y,self.t), self.G(x,y,self.t), self.B(x,y,self.t));
@@ -45,10 +49,7 @@ class Background extends Component {
   render(){
     return(
       <div className='background-canvas'>
-        <canvas ref='background'
-                width={width} 
-                height={height}
-        />
+        <canvas ref='background' width={width} height={height}/>
       </div>
     );
   }
