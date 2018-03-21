@@ -67,7 +67,7 @@ ul.header li a {
 
 body {
   -webkit-animation: background 20s infinite;
-  animation: background 10s infinite;
+  animation: background 20s infinite;
   -webkit-animation-direction: alternate;
   animation-direction: alternate;
 }

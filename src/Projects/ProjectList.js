@@ -1,6 +1,7 @@
 import CodeChallenge from './CodeChallenge/CodeChallenge';
 import Snake from './Snake/SnakeGame';
 import Background from './ColorShift/Background';
+import Main from './ReduxApp/Main';
 
 var projects = [
   {
@@ -20,10 +21,11 @@ var projects = [
     'name' : 'Color Shifting Canvas',
     'topics' : 'HTML canvas, Closure',
     'description' : 'While creating a shifting color background was easy to do in CSS, I decided to implement something similar in Javascript.'
-  }
+  },
+    'project' : Main,
+    'name' : 'D3 Data Visualization',
+    'topics' : 'D3, Redux',
+    'description' : '__'
 ];
 
-//
-//  REDUX PROJECT TOO!!!!!!!!!
-//
 export default projects;
