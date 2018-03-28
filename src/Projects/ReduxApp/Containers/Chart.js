@@ -27,7 +27,6 @@ class Chart extends Component {
   }
 
   componentDidMount(){
-    this.props.dispatch(actions.fetchTempData());
     this.setState({
       data: this.props.avgTempData,
     });
@@ -73,7 +72,9 @@ class Chart extends Component {
     var display;
     var title;
     
-    if (this.state.data){
+    if (!this.state.data){
+      title = null;
+    } else {
       title = this.state.data['description']['title'];
     }
 
@@ -98,6 +99,7 @@ class Chart extends Component {
             <a className="dropdown-item" onClick={this.handleDropDownClick}>Contiguous US Annual Precipitation</a>
           </ul>
         </div>
+        <br/>
         <div>
           <p>{title}</p>
           <div className='btn-group' role='group' >
