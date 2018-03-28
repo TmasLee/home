@@ -44,11 +44,13 @@ class CodeChallenge extends Component {
   render() {
 
     if (!this.state.antsArray){
-      return null
+      return <p>Loading...</p>
     }
 
     return (
-      <Table ants={this.state.antsArray}/>
+      <div className='ant-table'>
+        <Table ants={this.state.antsArray}/>
+      </div>
     );
   }
 }

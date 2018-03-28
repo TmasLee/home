@@ -35,6 +35,7 @@ class Project extends Component {
               }}>
                 {this.props.name}
               </button>
+              <br/><br/>
               <div className='Project'>
                 {this.state.isVisible ? <Wrapper/> : null}
               </div>

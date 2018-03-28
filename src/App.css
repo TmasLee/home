@@ -26,6 +26,11 @@
   font-size: large;
 }
 
+.ant-table {
+  margin: auto;
+  width: 50%;
+}
+
 h1, h2, p, ul, li {
   font-family: sans-serif;
 }
