@@ -1,17 +1,19 @@
 import React from 'react';
 
 const renderCircles = (props) => {
-  return (coords, index) => {
+  return (coordinates, scales, index) => {
+    console.log(props.xScale(coordinates[0]), props.yScale(coordinates[1]));
     const circleProps = {
-      cx : props.xScale(coords[0]),
-      cy: props.yScale(coords[1]),
+      cx : props.xScale(coordinates[0]),
+      cy: props.yScale(coordinates[1]),
       r: 2,
-      key: index
+      key: scales
     };
+
     return <circle {...circleProps}/>
   };
 };
 
 export default (props) => {
-  return <g>{props.data.map(renderCircles(props))}</g>
+  return <g>{props.properties.coordinates.map(renderCircles(props))}</g>
 }

@@ -20,7 +20,7 @@ class App extends Component {
                 </div>
               </div>
               <br/>
-              <h1 className='display-2'>Thomas Lee</h1>
+              <h3 className='display-3'>Thomas Lee</h3>
               <Main/>
             </div>
           </div>

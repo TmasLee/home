@@ -13,7 +13,8 @@ var store = createStore(
   applyMiddleware(thunk, logger)
 );
 
-store.dispatch(fetchTempData());
+store.dispatch(fetchTempData())
+  // .then(() => console.log(store.getState()));
 store.dispatch(fetchRainFallData());
 
 export default store;

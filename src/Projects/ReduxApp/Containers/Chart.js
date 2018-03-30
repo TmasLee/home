@@ -6,82 +6,97 @@ import ChartTypeBtn from './ChartTypeBtn';
 import * as actions from '../Actions/actions';
 
 const styles = {
-  width : 500,
+  width : 300,
   height : 300,
-  padding : 30
+  padding : 10
 }
 
 class Chart extends Component {
   constructor(props){
     super(props);
     this.state = {
-      data: null,
-      title: null,
-      years: null,
-      anomalies: null,
-      display: null,
+      display : null
     }
+
+    this.data = null;
+    this.title = null;
+    this.years = null;
+    this.values = null;
+    this.anomalies = null;
+    this.coords = null;
 
     this.handleOnClick = this.handleOnClick.bind(this);
     this.handleDropDownClick = this.handleDropDownClick.bind(this);
   }
 
   componentDidMount(){
-    this.setState({
-      data: this.props.avgTempData,
-    });
+    this.data = this.props.avgTempData;
+    this.title = this.data['description']['title'];
   }
 
   handleOnClick(type){
-    this.parseData();
+    const parsedData = this.parseData(),
+          years = parsedData[0],
+          values = parsedData[1],
+          anomalies = parsedData[2];
+
+    this.years = years;
+    this.values = values;
+    this.anomalies = anomalies;
+    this.coords = this.generateCoords();
+  
     this.setState({
       display: type
     });
+  
   }
 
   handleDropDownClick(){
-    this.setState({
-
-    })
+    
   }
 
   parseData(){
-    var chartData = this.state.data,
-        state = chartData['chart']['data'];
+    var chartData = this.data,
+        displayData = chartData['data'],
+        years = [],
+        values = [],
+        anomalies = [];
     
-    // Object.keys(state['data']).forEach(function(key){
-    //   var yearString = key.toString();
-    //   var year = parseInt(yearString.substring(0,4));
-    //   years.push(year);
-    // });
-
-    // Object.values(state['data']).forEach(function(prop){
-    //   values.push(prop['value']);
-    //   anomalies.push(prop['anomaly']);
-    // });
-
-    this.setState({
-      title: state['description']['title'],
-      // years: ,
-      // values: ,
-      // anomalies: 
+    Object.keys(displayData).forEach((key) =>{
+      var yearString = key.toString();
+      var year = parseInt(yearString.substring(0,4), 10);
+      years.push(year);
     });
+    Object.values(displayData).forEach((prop) =>{
+      values.push(prop['value']);
+      anomalies.push(prop['anomaly']);
+    });
+
+    return [years, values, anomalies];
+  }
+
+  // Currently only creates Year vs Temp 
+  generateCoords(){
+    let index = 0;
+    let coords = [];
+    this.years.forEach((year) => {
+      var coordPair = [year, parseInt(this.values[index], 10)];
+      coords.push(coordPair);
+      index++;
+    });
+    return coords;
   }
 
   render(){
     var display;
-    var title;
-    
-    if (!this.state.data){
-      title = null;
-    } else {
-      title = this.state.data['description']['title'];
-    }
+    // var title;
+    // title = (this.data === this.props.avgTempData) ? this.props.avgTempData['description']['title']
+    //                                           : this.props.avgRainFallData['description']['title'];
 
     if (this.state.display === 'Bar Graph'){
       // display = 
     } else if (this.state.display === 'Line Graph'){
-      display = <LineGraph  data={this.state.data} styles={styles}/>
+      display = <LineGraph coordinates={this.coords} styles={styles}/>
     } else if (this.state.display === 'Map'){
       // display =
     } else {
@@ -101,7 +116,7 @@ class Chart extends Component {
         </div>
         <br/>
         <div>
-          <p>{title}</p>
+          <p>{this.title}</p>
           <div className='btn-group' role='group' >
             <ChartTypeBtn type='Bar Graph' onClick={this.handleOnClick}/>
             <ChartTypeBtn type='Line Graph' onClick={this.handleOnClick}/>

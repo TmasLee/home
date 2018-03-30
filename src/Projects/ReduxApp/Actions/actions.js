@@ -3,23 +3,25 @@ var rainfall_url = 'https://www.ncdc.noaa.gov/cag/national/time-series/110-pcp-y
 
 export function fetchTempData(){
   return (dispatch) => {
-    _fetchTempData(dispatch)
+    // return _fetchTempData(dispatch)
+    return dispatch(_fetchTempData(dispatch))
   }
 }
 
 function _fetchTempData(dispatch){
-  dispatch({
-    type: 'FETCH_TEMPERATURE_DATA',
-    avgTempUrl: temp_url
-  });
-  return fetch(temp_url, {
-    method: 'GET'
-  })
-  .then(response => response.json())
-  .then(response => {
-    console.log(response);
-    dispatch(receiveData(temp_url, response));
-  })
+  return dispatch => { 
+    dispatch({
+      type: 'FETCH_TEMPERATURE_DATA',
+      avgTempUrl: temp_url
+    });
+    return fetch(temp_url, {
+      method: 'GET'
+    })
+    .then(response => response.json())
+    .then(response => {
+      dispatch(receiveData(temp_url, response));
+    });
+  }
 }
 
 export function fetchRainFallData(){
