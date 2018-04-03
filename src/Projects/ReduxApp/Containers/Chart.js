@@ -3,12 +3,12 @@ import {connect} from 'react-redux';
 
 import LineGraph from './LineGraph';
 import ChartTypeBtn from './ChartTypeBtn';
-import * as actions from '../Actions/actions';
+// import * as actions from '../Actions/actions';
 
 const styles = {
-  width : 300,
+  width : 550,
   height : 300,
-  padding : 10
+  padding : 20
 }
 
 class Chart extends Component {
@@ -20,47 +20,52 @@ class Chart extends Component {
 
     this.data = null;
     this.title = null;
+    this.units = null
     this.years = null;
     this.values = null;
-    this.anomalies = null;
     this.coords = null;
 
     this.handleOnClick = this.handleOnClick.bind(this);
-    this.handleDropDownClick = this.handleDropDownClick.bind(this);
   }
 
   componentDidMount(){
     this.data = this.props.avgTempData;
     this.title = this.data['description']['title'];
+    this.units = this.data['description']['units'];
   }
 
   handleOnClick(type){
+    if (type==='Average Temp'){
+      this.data = this.props.avgTempData;
+    } 
+    else {
+      this.data = this.props.avgRainFallData;
+    }
+   
     const parsedData = this.parseData(),
           years = parsedData[0],
           values = parsedData[1],
-          anomalies = parsedData[2];
+          title = parsedData[2],
+          units = parsedData[3];
 
+    this.title = title;
+    this.units = units;
     this.years = years;
     this.values = values;
-    this.anomalies = anomalies;
     this.coords = this.generateCoords();
-  
+
     this.setState({
       display: type
     });
-  
-  }
-
-  handleDropDownClick(){
-    
   }
 
   parseData(){
-    var chartData = this.data,
+    let chartData = this.data,
         displayData = chartData['data'],
         years = [],
         values = [],
-        anomalies = [];
+        title = chartData['description']['title'],
+        units = chartData['description']['units'];
     
     Object.keys(displayData).forEach((key) =>{
       var yearString = key.toString();
@@ -69,13 +74,11 @@ class Chart extends Component {
     });
     Object.values(displayData).forEach((prop) =>{
       values.push(prop['value']);
-      anomalies.push(prop['anomaly']);
     });
 
-    return [years, values, anomalies];
+    return [years, values, title, units];
   }
 
-  // Currently only creates Year vs Temp 
   generateCoords(){
     let index = 0;
     let coords = [];
@@ -84,46 +87,30 @@ class Chart extends Component {
       coords.push(coordPair);
       index++;
     });
+
     return coords;
   }
 
   render(){
     var display;
-    // var title;
-    // title = (this.data === this.props.avgTempData) ? this.props.avgTempData['description']['title']
-    //                                           : this.props.avgRainFallData['description']['title'];
 
-    if (this.state.display === 'Bar Graph'){
-      // display = 
-    } else if (this.state.display === 'Line Graph'){
-      display = <LineGraph coordinates={this.coords} styles={styles}/>
-    } else if (this.state.display === 'Map'){
-      // display =
-    } else {
+    if (!this.state.display){
       display = null;
+    }
+    else {
+      display = <LineGraph coordinates={this.coords} units={this.units} styles={styles}/>
     }
 
     return(
       <div>
-        <div className="dropdown">
-          <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Data To Display
-          </button>
-          <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a className="dropdown-item" onClick={this.handleDropDownClick}>Annual US Average Temperature</a>
-            <a className="dropdown-item" onClick={this.handleDropDownClick}>Contiguous US Annual Precipitation</a>
-          </ul>
-        </div>
         <br/>
-        <div>
-          <p>{this.title}</p>
-          <div className='btn-group' role='group' >
-            <ChartTypeBtn type='Bar Graph' onClick={this.handleOnClick}/>
-            <ChartTypeBtn type='Line Graph' onClick={this.handleOnClick}/>
-          </div>
-          <br/><br/>
-          {display}
-        </div>
+        <div className='btn-group-sm' role='group' >
+          <ChartTypeBtn type='Average Rainfall' onClick={this.handleOnClick}/>
+          <ChartTypeBtn type='Average Temp' onClick={this.handleOnClick}/>
+        </div><br/>
+        <p className='h4'>{this.title}</p>
+        <br/><br/>
+        {display}
       </div>
     )
   }

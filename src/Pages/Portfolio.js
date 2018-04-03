@@ -23,8 +23,6 @@ class Portfolio extends Component {
 
     return (
       <div className="Portfolio">
-        These sample programs could've been hosted using a Git Hosting site
-        but I wanted to implement them by hand for the sake of practicing.
         <br/><br/>
         {this.state.projects.map(project => {
           return (<Project
