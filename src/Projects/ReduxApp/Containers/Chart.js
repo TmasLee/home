@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import LineGraph from './LineGraph';
 import ChartTypeBtn from './ChartTypeBtn';
-// import * as actions from '../Actions/actions';
+import * as actions from '../Actions/actions';
 
 const styles = {
   width : 550,
@@ -29,18 +29,21 @@ class Chart extends Component {
   }
 
   componentDidMount(){
+    if (!this.data){
+      dispatch(actions.dataNotReady());
+    }
     this.data = this.props.avgTempData;
     this.title = this.data['description']['title'];
     this.units = this.data['description']['units'];
   }
 
   handleOnClick(type){
-    if (type==='Average Temp'){
-      this.data = this.props.avgTempData;
-    } 
-    else {
-      this.data = this.props.avgRainFallData;
+    if (!this.data){
+      return;
     }
+
+    this.data = (type === 'Average Temp') ? this.props.avgTempData 
+                                          : this.props.avgRainFallData;
    
     const parsedData = this.parseData(),
           years = parsedData[0],

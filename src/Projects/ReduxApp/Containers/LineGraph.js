@@ -29,5 +29,5 @@ export default (props) => {
     </svg>
   )}
 
-// -Handle error when waiting for data
+// -Handle error when waiting for data --> dispatch from Chart componentDidMount --> finish action dispatch {}
 // -Cache data so parsing doesnt happen again

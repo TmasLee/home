@@ -17,9 +17,8 @@ export default class Axis extends Component{
     if (this.props.type==='x'){
 
       axis = d3.axisBottom(scale).ticks(5);
-      d3.select(this.refs.axis).append('text')
-        // .style("text-anchor","middle").text(this.props.text)
-        .call(axis);  
+      d3.select(this.refs.axis).call(axis);
+      // .append('text').style("text-anchor","middle").text(this.props.text)
 
     } else {
 

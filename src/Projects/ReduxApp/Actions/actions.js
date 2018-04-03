@@ -57,3 +57,9 @@ export function receiveData(url,json){
     }
   }
 }
+
+export function dataNotReady(){
+  return dispatch({
+    type: 'DATA_NOT_READY'
+  })
+}
