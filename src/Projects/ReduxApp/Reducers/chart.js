@@ -3,6 +3,7 @@ var defaultState = {
   avgTempData: null,
   avgRainFallUrl: null,
   avgRainFallData: null,
+  loading: true
 }
 
 function chart(state=defaultState, action){
@@ -29,6 +30,11 @@ function chart(state=defaultState, action){
       return {
         ...state,
         avgRainFallData: action.data
+      }
+    case('DATA_READY'):
+      return {
+        ...state,
+        loading: false
       }
 
     default:

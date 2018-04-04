@@ -15,12 +15,12 @@ class Chart extends Component {
   constructor(props){
     super(props);
     this.state = {
-      display : null
+      display: null
     }
-
+    this.display = null;
     this.data = null;
     this.title = null;
-    this.units = null
+    this.units = null;
     this.years = null;
     this.values = null;
     this.coords = null;
@@ -28,20 +28,18 @@ class Chart extends Component {
     this.handleOnClick = this.handleOnClick.bind(this);
   }
 
-  componentDidMount(){
-    if (!this.data){
-      dispatch(actions.dataNotReady());
+  componentDidMount(){    
+    this.props.dispatch(actions.fetchRainFallData());
+    this.props.dispatch(actions.fetchTempData());
+}
+
+  componentWillReceiveProps(nextProps){
+    if (nextProps.avgRainFallData && nextProps.avgTempData){
+      this.props.dispatch(actions.dataReady());
     }
-    this.data = this.props.avgTempData;
-    this.title = this.data['description']['title'];
-    this.units = this.data['description']['units'];
   }
 
   handleOnClick(type){
-    if (!this.data){
-      return;
-    }
-
     this.data = (type === 'Average Temp') ? this.props.avgTempData 
                                           : this.props.avgRainFallData;
    
@@ -95,29 +93,32 @@ class Chart extends Component {
   }
 
   render(){
-    var display;
-
     if (!this.state.display){
-      display = null;
-    }
-    else {
-      display = <LineGraph coordinates={this.coords} units={this.units} styles={styles}/>
+      this.display = null;
+    } else {
+    this.display = <LineGraph coordinates={this.coords} units={this.units} styles={styles}/>
     }
 
-    return(
-      <div>
-        <br/>
-        <div className='btn-group-sm' role='group' >
-          <ChartTypeBtn type='Average Rainfall' onClick={this.handleOnClick}/>
-          <ChartTypeBtn type='Average Temp' onClick={this.handleOnClick}/>
-        </div><br/>
-        <p className='h4'>{this.title}</p>
-        <br/><br/>
-        {display}
-      </div>
-    )
+    if (this.props.loading === true){
+      return (<p>Loading...</p>);
+    } else if (this.props.loading === false){
+      return(
+        <div>
+          {this.props.errorMsg}
+          <br/>
+          <div className='btn-group-sm' role='group' >
+            <ChartTypeBtn type='Average Rainfall' onClick={this.handleOnClick}/>
+            <ChartTypeBtn type='Average Temp' onClick={this.handleOnClick}/>
+          </div>
+          <br/>
+          <p className='h4'>{this.title}</p>
+          <br/><br/>
+          {this.display}
+        </div>
+        )
+      }
+    }
   }
-}
 
 // Updates this component
 export default connect((state, props) => {
@@ -126,5 +127,7 @@ export default connect((state, props) => {
     avgTempData: state.chart.avgTempData,
     avgRainFallUrl: state.chart.avgRainFallUrl,
     avgRainFallData: state.chart.avgRainFallData,
+    loading: state.chart.loading,
+    errorMsg: state.errors.errorMsg,
   }
 })(Chart);

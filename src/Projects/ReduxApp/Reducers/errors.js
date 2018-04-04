@@ -4,18 +4,23 @@ var defaultState = {
 
 function errors(state=defaultState, action){
   switch (action.type){
+    case('DATA_READY'):
+      return {
+        ...state,
+        errorMsg: ''
+      }
     case('UNSUCCESSFUL_FETCH'):
-    return {
-      ...state,
-      errorMsg: action.data.msg
+      return {
+        ...state,
+        errorMsg: action.data.msg
+      }
+    case('SUCCESSFUL_FETCH'):
+      return {
+        ...state,
+        errorMsg: ''
     }
-  case('SUCCESSFUL_FETCH'):
-    return {
-      ...state,
-      errorMsg: action.data.msg
-    }
-  default:
-    return state;
+    default:
+      return state;
   }
 }
 
