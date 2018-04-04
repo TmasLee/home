@@ -28,6 +28,3 @@ export default (props) => {
       <XYAxis {...props} xScale={xScale} yScale={yScale}/>
     </svg>
   )}
-
-// -Handle error when waiting for data --> dispatch from Chart componentDidMount --> finish action dispatch {}
-// -Cache data so parsing doesnt happen again

@@ -49,8 +49,8 @@ class Chart extends Component {
           title = parsedData[2],
           units = parsedData[3];
 
-    this.title = title;
     this.units = units;
+    this.title = title.concat(`, Years vs. ${this.units}`);
     this.years = years;
     this.values = values;
     this.coords = this.generateCoords();
