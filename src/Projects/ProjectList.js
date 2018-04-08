@@ -2,6 +2,7 @@ import CodeChallenge from './CodeChallenge/CodeChallenge';
 import Snake from './Snake/SnakeGame';
 import Background from './ColorShift/Background';
 import D3_App from './ReduxApp/D3_App';
+import D3_App_2 from './D3_Visual/D3_App_2';
 
 var projects = [
   {
@@ -27,6 +28,12 @@ var projects = [
     'name' : 'D3 Data Visualization',
     'topics' : 'D3, Redux, API calling',
     'description' : 'A simple project for learning to use D3 with React. Wrestled with combining React and D3 as they do not play well together. Learned to limit the amount of control D3 has over the DOM by passing it an <svg> container. Lesson learned, developing with both React and D3 is definitely possible and there are a few ways to get this done. The challenge is getting it all to work together seamlessly.' 
+  },
+  {
+    'project' : D3_App_2,
+    'name' : 'Another D3 Visualization',
+    'topics' : 'D3, Redux, API calling',
+    'description' : 'On the way'
   }
 ];
 
