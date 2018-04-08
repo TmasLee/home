@@ -89,7 +89,69 @@ class GameBoard extends Component {
         }
       }, 100);
     }, false);
+  }
 
+  // Remove eventlisteners when component unmounts
+  componentWillUnmount(){
+    this.context = this.refs.canvas.getContext('2d');
+    this.refs.canvas.removeEventListener('keydown', (e) => {
+      e.preventDefault();
+      switch(e.keyCode){
+        case 37: //left
+          if (this.state.xVel > 0){
+            // do nothing
+          } else {
+            this.setState({xVel: -speed, yVel: 0});
+          }
+          break;
+
+        case 38: //up
+          if (this.state.yVel > 0){
+            // do nothing
+          } else {
+            this.setState({xVel: 0, yVel: -speed});
+          }
+          break;
+
+        case 39: //right
+          if (this.state.xVel < 0){
+            // do nothing
+          } else {
+          this.setState({xVel: speed, yVel: 0});
+        }
+          break;
+
+        case 40: //down
+          if (this.state.yVel < 0){
+            // do nothing
+          } else {
+            this.setState({xVel: 0, yVel: speed});
+          }
+          break;
+
+        default: 
+          console.log('');
+      }
+    }, false);
+
+    this.refs.canvas.removeEventListener('click', (e) => {
+      this.setState({
+        message: '',
+        xVel: speed,
+        state: 1
+      });
+
+      if (this.loop){
+        return;
+      }
+
+      this.loop = setInterval( () => {
+        if (this.state.state === 1){
+          this.update();
+          this.draw();
+        }
+      }, 100);
+    }, false);
   }
 
   setUpCanvas(){

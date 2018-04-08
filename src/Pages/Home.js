@@ -15,7 +15,7 @@ class Home extends Component {
         <br/>
         <h5>Skills and Experience:</h5>
             Javascript(ES6), Node/Express, React/Redux, HTML/CSS/Bootstrap, MySQL,
-            RESTful API, jQuery, Python, Java, GitHub, AWS
+            RESTful API, jQuery, Python, Java, GitHub, AWS, Jest, React Native, D3,
             <br/><br/><br/>
       </div>
     );

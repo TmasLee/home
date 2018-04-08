@@ -29,5 +29,8 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://sendmebiscuits.github.io/home"
+  "homepage": "https://sendmebiscuits.github.io/home",
+  "devDependencies": {
+    "jest": "^22.4.3"
+  }
 }
