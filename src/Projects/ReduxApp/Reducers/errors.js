@@ -1,5 +1,5 @@
 var defaultState = {
-  errorMsg: ''
+  errorMsg: null
 }
 
 function errors(state=defaultState, action){
@@ -7,7 +7,7 @@ function errors(state=defaultState, action){
     case('DATA_READY'):
       return {
         ...state,
-        errorMsg: ''
+        errorMsg: null
       }
     case('UNSUCCESSFUL_FETCH'):
       return {
@@ -17,7 +17,7 @@ function errors(state=defaultState, action){
     case('SUCCESSFUL_FETCH'):
       return {
         ...state,
-        errorMsg: ''
+        errorMsg: null
     }
     default:
       return state;

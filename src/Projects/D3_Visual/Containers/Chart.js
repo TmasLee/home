@@ -1,21 +1,30 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
+import LineGraph from './Line/LineGraph';
+import PieChart from './Pie/PieChart';
 import ChartBtn from '../../ReduxApp/Containers/ChartTypeBtn';
 import * as actions from '../Actions/actions';
 
 const styles = {
+  width: 600,
+  height: 600,
+  padding: 50,
 
 }
+
+const sampleData = [50,30,60,40];
 
 class Chart extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      display: null
-    }
+    this.state = {};
+
+    this.display = null;
     this.loading = this.props.loading;
     this.title = 'NYC Leading Causes of Death';
+    this.xData = [];
+    this.yData = [];
 
     this.handleOnClick = this.handleOnClick.bind(this);
   }
@@ -25,17 +34,31 @@ class Chart extends Component {
   }
   
   componentWillReceiveProps(nextProps){
+    if (nextProps.rawData !== this.props.rawData){
+      this.props.dispatch(actions.parseData(nextProps.rawData));
+    }
     if (nextProps.loading===false){
-      this.loading = false;
+      this.loading = nextProps.loading;
+    }
+    if (nextProps.displayType === 'Line'){
+      this.display = <LineGraph {...styles} xData={this.xData} yData={this.yData}/>
+    } else if (nextProps.displayType === 'Bar'){
+
+    }else if (nextProps.displayType === 'Pie'){
+      this.display = <PieChart {...styles} data={sampleData}/>
     }
   }
 
   handleOnClick(type){
-
+    this.props.dispatch(actions.changeDisplay(type));
   }
 
   render(){
-    let display;
+    let error = null;
+    
+    if (this.props.errorMsg){
+      error = this.props.errorMsg;
+    }
     if (this.loading === true){
       return (<p>Loading...</p>);
     } else {
@@ -43,15 +66,13 @@ class Chart extends Component {
         <div>
           <p className='h4'>{this.title}</p>
           <br/>
-          {this.props.errorMsg}
-          <br/>
+          {error}
           <div className='btn-group-sm' role='group' >
             <ChartBtn type='Line' onClick={this.handleOnClick}/>
             <ChartBtn type='Bar' onClick={this.handleOnClick}/>
-            <ChartBtn type='Comparative Line?' onClick={this.handleOnClick}/>
-            <ChartBtn type='Place Holder' onClick={this.handleOnClick}/>
+            <ChartBtn type='Pie' onClick={this.handleOnClick}/>
           </div>
-          <br/><br/>
+          <br/>
           {this.display}
         </div>
       )
@@ -61,6 +82,8 @@ class Chart extends Component {
 
 export default connect((state, props) => {
   return {
+    rawData: state.chart.rawData,
+    fetchDone: state.chart.fetchDone,
     year: state.chart.year,
     leadingCause: state.chart.leadingCause,
     sex: state.chart.sex,
