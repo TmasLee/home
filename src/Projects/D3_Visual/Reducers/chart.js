@@ -1,13 +1,6 @@
 var defaultState = {
   rawData: null,
-  // fetchDone: false,
-  year: null,
-  leadingCause: null,
-  sex: null,
-  ethnicity: null,
-  deaths: null,
-  deathRate: null,
-  ageAdjustedRate: null,
+  deathsByYear: null,
   displayType: null,
   loading: true
 }
@@ -34,13 +27,7 @@ function chart(state=defaultState, action){
     case 'PARSE_COMPLETE':
       return {
         ...state,
-        year: action.year,
-        leadingCause: action.leadingCause,
-        sex: action.sex,
-        ethnicity: action.ethnicity,
-        deaths: action.deaths,
-        deathRate: action.deathRate,
-        ageAdjustedRate: action.ageAdjustedRate,
+        deathsByYear: action.deathsByYear,
       }
     case 'LOADING_DONE':
       return {

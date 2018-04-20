@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-import LineGraph from './Line/LineGraph';
 import PieChart from './Pie/PieChart';
 import ChartBtn from '../../ReduxApp/Containers/ChartTypeBtn';
 import * as actions from '../Actions/actions';
@@ -13,8 +12,6 @@ const styles = {
 
 }
 
-const sampleData = [50,30,60,40];
-
 class Chart extends Component {
   constructor(props){
     super(props);
@@ -23,8 +20,6 @@ class Chart extends Component {
     this.display = null;
     this.loading = this.props.loading;
     this.title = 'NYC Leading Causes of Death';
-    this.xData = [];
-    this.yData = [];
 
     this.handleOnClick = this.handleOnClick.bind(this);
   }
@@ -39,13 +34,11 @@ class Chart extends Component {
     }
     if (nextProps.loading===false){
       this.loading = nextProps.loading;
-    }
-    if (nextProps.displayType === 'Line'){
-      this.display = <LineGraph {...styles} xData={this.xData} yData={this.yData}/>
-    } else if (nextProps.displayType === 'Bar'){
+    } 
+    if (nextProps.displayType === 'Bar'){
 
     }else if (nextProps.displayType === 'Pie'){
-      this.display = <PieChart {...styles} data={sampleData}/>
+      this.display = <PieChart {...styles} data={this.props.deathsByYear}/>
     }
   }
 
@@ -68,11 +61,11 @@ class Chart extends Component {
           <br/>
           {error}
           <div className='btn-group-sm' role='group' >
-            <ChartBtn type='Line' onClick={this.handleOnClick}/>
             <ChartBtn type='Bar' onClick={this.handleOnClick}/>
             <ChartBtn type='Pie' onClick={this.handleOnClick}/>
           </div>
-          <br/>
+          <br/><br/>
+
           {this.display}
         </div>
       )
@@ -83,14 +76,7 @@ class Chart extends Component {
 export default connect((state, props) => {
   return {
     rawData: state.chart.rawData,
-    fetchDone: state.chart.fetchDone,
-    year: state.chart.year,
-    leadingCause: state.chart.leadingCause,
-    sex: state.chart.sex,
-    ethnicity: state.chart.ethnicity,
-    deaths: state.chart.deaths,
-    deathRate: state.chart.deathRate,
-    ageAdjustedRate: state.chart.ageAdjustedRate,
+    deathsByYear: state.chart.deathsByYear,
     displayType: state.chart.displayType,
     loading: state.chart.loading,
     errorMsg: state.errors.errorMsg,

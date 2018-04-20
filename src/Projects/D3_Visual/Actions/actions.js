@@ -45,47 +45,34 @@ export function parseData(data){
 }
 
 function _parseData(data, dispatch){
-  let deathsByYear = null,
-      uniqueYears = null,
-      year=[];
+  // Object with props that are every unique year in data.
+  let deathsByYear = {}; 
 
-  Object.values(data).forEach((prop)=>{
-    year.push(prop['year']);
-  });
-
-  //  From var year get unique years using ES6 Set
-  uniqueYears = [...new Set(year)];
-
-  deathsByYear = seperateDeathsByYear(uniqueYears, data);
+  //  Add props to deathsByYear based on unique years in data. 
+  for (var i=0; i<data.length; i++){
+    // Very first prop and data value added
+    if (deathsByYear.length === 0){
+      deathsByYear[`${data[i]['year']}`] = [];      
+      deathsByYear[`${data[i]['year']}`].push(data[i]);
+    } 
+    // Else check if year exists
+    // If year exists in deathsByYear, add death to that year
+    // Else create new year prop and add death
+    else {
+      if (data[i]['year'] in deathsByYear){
+        deathsByYear[`${data[i]['year']}`].push(data[i]);
+      } else {
+        deathsByYear[`${data[i]['year']}`] = [];
+        deathsByYear[`${data[i]['year']}`].push(data[i]);
+      }
+    }
+  }
+  console.log(deathsByYear);
 
   dispatch({
     type: 'PARSE_COMPLETE',
-    year: year,
+    deathsByYear: deathsByYear,
   });
-}
-
-function seperateDeathsByYear(uniqueYears, rawData){
-  let deathsByYear = {};
-
-  Object.values(uniqueYears).forEach((prop)=>{
-    deathsByYear[`${prop}`] = [];
-    console.log(deathsByYear);
-  });
-
-  //  For each death in rawData, check which year in uniqueYears
-  //  the death happened in and add it to deathsByYear.
-  Object.values(rawData).forEach((prop)=>{
-    let index = 0;
-    while (index<uniqueYears.length){
-      if (prop['year'] === uniqueYears[index]){
-        // deathsByYear[`${uniqueYears[index]}`].push(prop);
-        console.log(uniqueYears[index]);
-      }
-      index++;
-    }
-  });
-
-  return deathsByYear;
 }
 
 export function changeDisplay(displayType){
@@ -96,5 +83,3 @@ export function changeDisplay(displayType){
     })
   }
 }
-
-// export function 
