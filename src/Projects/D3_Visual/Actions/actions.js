@@ -47,23 +47,29 @@ export function parseData(data){
 function _parseData(data, dispatch){
   // Object with props that are every unique year in data.
   let deathsByYear = {}; 
+  // Tracks all unique years
+  let yearsBtnArr = [];
 
   //  Add props to deathsByYear based on unique years in data. 
   for (var i=0; i<data.length; i++){
     // Very first prop and data value added
     if (deathsByYear.length === 0){
-      deathsByYear[`${data[i]['year']}`] = [];      
+      deathsByYear[`${data[i]['year']}`] = [];
       deathsByYear[`${data[i]['year']}`].push(data[i]);
+
+      yearsBtnArr.push(data[i]['year']);
     } 
     // Else check if year exists
     // If year exists in deathsByYear, add death to that year
-    // Else create new year prop and add death
+    // Else create new year prop and add death. 
     else {
       if (data[i]['year'] in deathsByYear){
         deathsByYear[`${data[i]['year']}`].push(data[i]);
       } else {
         deathsByYear[`${data[i]['year']}`] = [];
         deathsByYear[`${data[i]['year']}`].push(data[i]);
+
+        yearsBtnArr.push(data[i]['year']);
       }
     }
   }
@@ -72,6 +78,7 @@ function _parseData(data, dispatch){
   dispatch({
     type: 'PARSE_COMPLETE',
     deathsByYear: deathsByYear,
+    yearsBtnArr: yearsBtnArr
   });
 }
 

@@ -1,6 +1,7 @@
 var defaultState = {
   rawData: null,
   deathsByYear: null,
+  yearsBtnArr: null,
   displayType: null,
   loading: true
 }
@@ -28,6 +29,7 @@ function chart(state=defaultState, action){
       return {
         ...state,
         deathsByYear: action.deathsByYear,
+        yearsBtnArr: action.yearsBtnArr
       }
     case 'LOADING_DONE':
       return {

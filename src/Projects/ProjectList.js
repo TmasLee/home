@@ -33,7 +33,7 @@ var projects = [
     'project' : D3_App_2,
     'name' : 'Another D3 Visualization',
     'topics' : 'D3, Redux, API calling',
-    'description' : 'On the way'
+    'description' : 'Aware that  redux isnt needed in these apps but wanted to use it for practice. '
   }
 ];
 
