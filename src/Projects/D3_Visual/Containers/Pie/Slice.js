@@ -1,27 +1,54 @@
 import React, {Component} from 'react';
 import * as d3 from 'd3';
+import {event as currentEvent} from 'd3-selection';
 
 export default class Slice extends Component{
   constructor(props){
     super(props);
+    this.state = {
+      isHovered: false
+    };
 
-    this.arc = d3.arc();
+    this.onMouseOver = this.onMouseOver.bind(this);
+    this.onMouseOut = this.onMouseOut.bind(this);
+
   }
-  componentWillMount(){
-    this.updateD3(this.props);
+
+  onMouseOver(){
+    this.setState({isHovered: true});
   }
-  componentWillReceiveProps(newProps){
-    this.updateD3(newProps);
+
+  onMouseOut(){
+    this.setState({isHovered: false});
   }
-  updateD3(newProps){
-    this.arc.innerRadius(newProps.innerRadius);
-    this.arc.outerRadius(newProps.outerRadius);
-  }
+
   render(){
+    let {data, color, innerRadius, outerRadius} = this.props;
+
+    if (this.state.isHovered){
+      outerRadius *= 1.1;
+    }
+
+    let arc = d3.arc()
+                .innerRadius(innerRadius)
+                .outerRadius(outerRadius);
+                
     console.log(this.props);
+
     return (
-      <path d={this.arc(this.props.data)}
-            style={{fill: this.props.color}}></path>
+      <g onMouseOver={this.onMouseOver}
+         onMouseOut={this.onMouseOut}>
+        <path d={arc(data)}
+              fill={color}/>
+        <text className='label'
+              transform={arc.centroid(data)}>
+          {data.value}
+        </text>
+      </g>
     )
   }
 }
+
+// Tuesday --> Mouse over / cleanup / render correct data for each year
+// Wednesday --> transitions 
+// Thursday?? --> Make wsj mock up
