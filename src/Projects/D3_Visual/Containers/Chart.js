@@ -7,8 +7,8 @@ import YearBtn from './YearBtn';
 import * as actions from '../Actions/actions';
 
 const styles = {
-  width: 700,
-  height: 700,
+  width: 800,
+  height: 800,
   padding: 50,
 
 };

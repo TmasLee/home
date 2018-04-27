@@ -10,12 +10,23 @@ export default class Pie extends Component{
     this.colorScale = d3.scaleOrdinal(d3.schemeCategory10);
     this.renderSlice = this.renderSlice.bind(this);
     this.translate = `translate(${this.props.width/2}, ${this.props.width/2})`;
+    this.deathTotal = this.getTotalDeaths(this.props.data);
+
+  }
+
+  getTotalDeaths(data){
+    let count = 0;
+    Object.values(data).forEach((cause)=> {
+      count += cause.total;
+    });
+    return count;
   }
 
   renderSlice(d, i){
     return (
       <Slice key={i}
             data={d}
+            deathTotal={this.deathTotal}
             innerRadius={this.props.width/7}
             outerRadius={this.props.width/3}
             color={this.colorScale(i)}/>
@@ -25,9 +36,8 @@ export default class Pie extends Component{
   render(){
     let {data} = this.props;
     let pie = d3.pie()
+                .sort(null)
                 .value((d)=> d.total)(data);
-
-    console.log(pie);
 
     return (
       <svg width={this.props.width} height={this.props.height}>
@@ -38,3 +48,7 @@ export default class Pie extends Component{
     )
   }
 }
+
+// zoom in function 
+// Hover on slice add tooltip --> 
+// Center of pie--> total deaths in 8 years
