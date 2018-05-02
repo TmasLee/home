@@ -7,24 +7,23 @@ import YearBtn from './YearBtn';
 import * as actions from '../Actions/actions';
 
 const styles = {
-  width: 800,
-  height: 800,
+  width: 900,
+  height: 700,
   padding: 50,
-
 };
 
 class Chart extends Component {
   constructor(props){
     super(props);
-    this.state = {};
+    this.state = {
+      data: null
+    };
 
     this.data = null;
     this.display = null;
-    this.currentYear = null;
     this.yearBtnGroup = null;
-    this.yearsBtnArr = this.props.yearsBtnArr;
     this.loading = this.props.loading;
-    this.title = 'NYC Leading Causes of Death';
+    this.title = 'NYC Leading Causes of Death from 2007-2014';
 
     this.handleOnClick = this.handleOnClick.bind(this);
     this.handleYearClick = this.handleYearClick.bind(this);
@@ -35,9 +34,12 @@ class Chart extends Component {
   }
   
   componentWillReceiveProps(nextProps){
+    console.log(nextProps);
     if (nextProps.rawData !== this.props.rawData){
       this.props.dispatch(actions.parseData(nextProps.rawData));
-      
+    }
+    if (nextProps.currentYearData !== this.props.currentYearData){
+      this.setState({data: nextProps.data})
     }
     if (nextProps.loading===false){
       this.loading = nextProps.loading;
@@ -49,57 +51,81 @@ class Chart extends Component {
     }
   }
 
+  componentWillUnmount(){
+    this.props.dispatch(actions.unmount());
+  }
+
   handleOnClick(type){
     let leadingCausesDeathTotal = this.props.leadingCauses;
     let deathsByYear = this.props.deathsByYear;
 
-    this.currentYear = 'Total';
-
-    for (var year in deathsByYear){
-      for (var cause in leadingCausesDeathTotal){
-        leadingCausesDeathTotal[cause]['name'] = cause; 
-        for (var index in deathsByYear[`${year}`][`${cause}`]){
-          let deaths = parseInt(deathsByYear[`${year}`][`${cause}`][`${index}`]['deaths'], 10);
-          // Check if deathsByYear[`${year}`][`${cause}`][`${index}`]['deaths'] is a number bc there are some '.'
-          if (Number.isInteger(deaths)){
-            //Parse string to integer and add to total
-            leadingCausesDeathTotal[cause]['total'] += deaths;
-          } 
+    // if (localStorage.getItem('totalDataObj')){
+    //   this.data = JSON.parse(localStorage.getItem('totalDataObj'));
+    //   this.props.dispatch(actions.changeCurrentYear(this.data));
+    // } else {
+      for (var year in deathsByYear){
+        for (var cause in leadingCausesDeathTotal){
+          leadingCausesDeathTotal[cause]['name'] = cause; 
+          for (var index in deathsByYear[`${year}`][`${cause}`]){
+            let deaths = parseInt(deathsByYear[`${year}`][`${cause}`][`${index}`]['deaths'], 10);
+            // Check if deathsByYear[`${year}`][`${cause}`][`${index}`]['deaths'] is a number bc there are some '.'
+            if (Number.isInteger(deaths)){
+              //Parse string to integer and add to total
+              leadingCausesDeathTotal[cause]['total'] += deaths;
+            }
+          }
         }
-      }        
-    }
-    console.log(leadingCausesDeathTotal);
-    this.data = Object.values(leadingCausesDeathTotal);
-    console.log(this.data);
+      }
+      this.data = Object.values(leadingCausesDeathTotal);
+      this.props.dispatch(actions.changeCurrentYear(this.data));
+      // Store in cache
+      localStorage.setItem('totalDataObj', JSON.stringify(this.data));
 
-    this.yearBtnGroup = (
-      <div className='btn-group-sm' role='group' >
-        {this.props.yearsBtnArr.map((year, i)=>{
-          return (
-            <YearBtn key={i} year={year} onClick={this.handleYearClick}/>
-          )
-        })}
-        <YearBtn year='Total' onClick={this.handleYearClick}/>
-      </div>
-    )
+      console.log(this.data);
 
-    this.props.dispatch(actions.changeDisplay(type));
+      this.yearBtnGroup = (
+        <div className='btn-group-sm' role='group' >
+          {this.props.yearsBtnArr.map((year, i)=>{
+            return (
+              <YearBtn key={i} year={year} onClick={this.handleYearClick}/>
+            )
+          })}
+        </div>
+      )
+      this.props.dispatch(actions.changeDisplay(type));
+    // }
   }
 
   handleYearClick(year){
+
     if (year==='Total'){
-      let numberOfDeathsPerYear = [];
-
-      Object.keys(this.props.deathsByYear).forEach((deathsInYear)=>{
-        numberOfDeathsPerYear.push(deathsInYear);
-      });
-
-      this.data = numberOfDeathsPerYear;
+      let retrievedTotalDataObj = JSON.parse(localStorage.getItem('totalDataObj'));
+      this.data = retrievedTotalDataObj;
+      this.props.dispatch(actions.changeCurrentYear(this.data));
+      console.log(this.data);
 
     } else {
 
+      let leadingCausesDeathTotal = this.props.leadingCauses;
+      let deathsByYear = this.props.deathsByYear;
+      console.log(deathsByYear);
+
+      for (var cause in deathsByYear[`${year}`]){
+        leadingCausesDeathTotal[cause]['total'] = 0;
+        // eslint-disable-next-line
+        Object.values(deathsByYear[`${year}`][`${cause}`]).forEach((deathsByRace)=>{
+          let deaths = parseInt(deathsByRace['deaths'], 10);
+            if (Number.isInteger(deaths)){
+              leadingCausesDeathTotal[cause]['total'] += deaths;
+            }
+          })
+        }
+        this.data = Object.values(leadingCausesDeathTotal);
+        this.props.dispatch(actions.changeCurrentYear(this.data));
+
+        console.log(this.data);
+      }
     }
-  }
 
   render(){
     let error = null;
@@ -115,13 +141,12 @@ class Chart extends Component {
           <p className='h4'>{this.title}</p>
           <br/>
           {error}
-          <div className='btn-group-sm' role='group' >
+          <div className='btn-group-sm' role='group'>
             <ChartBtn type='Bar' onClick={this.handleOnClick}/>
             <ChartBtn type='Pie' onClick={this.handleOnClick}/>
           </div>
-          <br/>
           {this.yearBtnGroup}
-          <br/><br/>
+          <br/>
           {this.display}
         </div>
       )
@@ -132,6 +157,7 @@ class Chart extends Component {
 export default connect((state, props) => {
   return {
     rawData: state.chart.rawData,
+    currentYearData: state.chart.currentYearData,
     deathsByYear: state.chart.deathsByYear,
     yearsBtnArr: state.chart.yearsBtnArr,
     leadingCauses: state.chart.leadingCauses,
@@ -140,9 +166,3 @@ export default connect((state, props) => {
     errorMsg: state.errors.errorMsg,
   }
 })(Chart);
-
-// Clean up code, make more readable and logical
-// Multipurpose component button
-// Button on click value processing 
-
-// Save values in cache so dont gotta do same calculations again

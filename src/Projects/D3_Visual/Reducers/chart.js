@@ -1,5 +1,6 @@
 var defaultState = {
   rawData: null,
+  currentYearData: null,
   deathsByYear: null,
   yearsBtnArr: null,
   leadingCauses: null,
@@ -42,6 +43,22 @@ function chart(state=defaultState, action){
       return {
         ...state,
         displayType: action.displayType
+      }
+    case 'UNMOUNT':
+      return {
+        ...state,
+        rawData: null,
+        currentYearData: null,
+        deathsByYear: null,
+        yearsBtnArr: null,
+        leadingCauses: null,
+        displayType: null,
+        loading: true
+      }
+    case 'CHANGE_CURRENT_YEAR':
+      return {
+        ...state,
+        currentYearData: action.currentYearData
       }
     default:
       return state;

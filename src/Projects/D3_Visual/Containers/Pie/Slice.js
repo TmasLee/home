@@ -43,6 +43,10 @@ export default class Slice extends Component{
     }
   }
 
+  formatName(name){
+    return name.slice(0, name.indexOf('('));
+  }
+
   onMouseOver(){
     this.setState({isHovered: true});
   }
@@ -67,11 +71,11 @@ export default class Slice extends Component{
 
     if ((this.state.showLabel === true)&&(this.state.showLabelLine === false)){
       labelLine = null;
-      label = data.data.name;
+      label = this.formatName(data.data.name);
       percentDisplay= this.percent + '%';
     }
     else if ((this.state.showLabel === true)&&(this.state.showLabelLine === true)){
-      labelLine = <LabelLine data={data} percentage={this.percent} arcCentroid={arc.centroid(data)}/>;
+      labelLine = <LabelLine name={this.formatName(data.data.name)} percentage={this.percent} arcCentroid={arc.centroid(data)}/>;
       label = null;
       percentDisplay= this.percent + '%';
     }
@@ -84,17 +88,20 @@ export default class Slice extends Component{
     return (
       <g onMouseOver={this.onMouseOver}
          onMouseOut={this.onMouseOut}>
-        <path d={arc(data)}
+         <path d={arc(data)}
               fill={color}/>
         {labelLine}
-        <text transform={`translate(${arc.centroid(data)})`}>
-          {label}
-          {percentDisplay}
+        <text textAnchor={'middle'} transform={`translate(${arc.centroid(data)})`}>
+          <tspan >{label}</tspan>
+        </text>
+        <text textAnchor={'middle'} transform={`translate(${arc.centroid(data)})`}>
+          <tspan dx='.4em' dy='1em'>{percentDisplay}</tspan>
         </text>
       </g>
     )
   }
 }
 
-// Friday --> cleanup / render correct data for each year / onClick slice
-// Sat/Sun --> transitions 
+//  cleanup
+// show actual deaths on hover or in center
+//  transitions 

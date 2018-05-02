@@ -1,8 +1,10 @@
 import React from 'react';
 import * as d3 from 'd3';
 
+import Text from 'react-svg-text';
+
 export default (props) => {
-  let {data, arcCentroid} = props;
+  let {name, arcCentroid} = props;
 
   const x1 = () => {
     return arcCentroid[0];
@@ -12,12 +14,12 @@ export default (props) => {
   }
   const x2 =  () => {
     let midAngle = Math.atan2(arcCentroid[1], arcCentroid[0]);
-    let x = Math.cos(midAngle) * 300; 
+    let x = Math.cos(midAngle) * 320; 
     return x;
   }
   const y2 = () => {
     let midAngle = Math.atan2(arcCentroid[1], arcCentroid[0]);
-    let y = Math.sin(midAngle) * 300;
+    let y = Math.sin(midAngle) * 320;
     return y;
   }
 
@@ -34,10 +36,10 @@ export default (props) => {
   return (
     <g>
       <path stroke='black' strokeWidth='2' d={Line(points)}/>
-      <text className='label'
-            transform={`translate(${[x2(),y2()]})`}>
-        {data.data.name}
-      </text>
+      <Text x={x2()} y={y2()} dx={-5} dy={-200} width={130}
+            textAnchor={'end'}>
+        {name}
+      </Text>
     </g>
   )
 }

@@ -89,6 +89,9 @@ function _parseData(data, dispatch){
       }
     }
   }
+  // Add a total button 
+  yearsBtnArr.push('Total');
+  
   console.log(deathsByYear);
   console.log(leadingCauses);
 
@@ -106,5 +109,18 @@ export function changeDisplay(displayType){
       type: 'CHANGE_DISPLAY',
       displayType: displayType
     })
+  }
+}
+
+export function unmount(){
+  return {
+    type: 'UNMOUNT'
+  }
+}
+
+export function changeCurrentYear(newYearData){
+  return {
+    type: 'CHANGE_CURRENT_YEAR',
+    currentYearData: newYearData
   }
 }
