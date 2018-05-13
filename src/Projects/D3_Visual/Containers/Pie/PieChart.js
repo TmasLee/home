@@ -35,8 +35,7 @@ export default class Pie extends Component{
             deathTotal={this.deathTotal}
             innerRadius={pieStyles.innerRadius}
             outerRadius={pieStyles.outerRadius}
-            color={this.colorScale(i)}
-            onMouseOver={this.updateCenterData}/>
+            color={this.colorScale(i)}/>
           )
         }
 
