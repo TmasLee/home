@@ -33,7 +33,7 @@ var projects = [
     'project' : D3_App_2,
     'name' : 'Another D3 Visualization',
     'topics' : 'D3, Redux, API calling, Caching',
-    'description' : 'Another data visual. Redux isn\'t needed in these apps as the data isn\'t being shared by a lot of different components. In fact it would probably be easier to implement these apps without Redux but I opted to use Redux for practice. Also another thing learned: planning is very important if you don\'t want spaghetti. A definitive end product/functionality should be defined otherwise components end up being improv\'ed upon.' 
+    'description' : 'Another data visual. Redux isn\'t needed in these apps as the data isn\'t being shared by a lot of different components. In fact it would probably be easier to implement these apps without Redux but I opted to use Redux for practice. Also another thing learned: planning is very important if you don\'t want spaghetti. A definitive end product/functionality should be defined otherwise components end up being improv\'ed upon. As my applications are getting more complex it\'s become clear that planning is a major part of software development.' 
   }
 ];
 
