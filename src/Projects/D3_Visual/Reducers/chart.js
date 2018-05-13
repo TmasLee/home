@@ -60,6 +60,16 @@ function chart(state=defaultState, action){
         ...state,
         currentYearData: action.currentYearData
       }
+    case 'CACHE_NEW_DATA':
+      return {
+        ...state,
+        currentYearData: action.currentYearData
+      }
+    case 'CACHE_TOTAL_DATA':
+      return {
+        ...state,
+        currentYearData: action.cachedData
+      }
     default:
       return state;
   }

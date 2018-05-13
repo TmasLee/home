@@ -101,7 +101,3 @@ export default class Slice extends Component{
     )
   }
 }
-
-//  cleanup
-// show actual deaths on hover or in center
-//  transitions 

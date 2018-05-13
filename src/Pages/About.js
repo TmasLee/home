@@ -11,7 +11,7 @@ class About extends Component {
         </div>
         <br/><br/>
         <p>Having graduated in December 2017 with a Bachelor's Degree in Chemistry, I spent the last 
-        year learning Javascript and improving my abilities as a developer. While experimenting with
+        two years learning Javascript and improving my abilities as a developer. While experimenting with
         different libraries I've created small apps and sites for myself to apply concepts I've learned.
         These days I am focusing on React!
         </p>
@@ -22,7 +22,7 @@ class About extends Component {
         chemistry. Ever since, coding became a passion. </p>
         <br/>
         <p>In hindsight, the core skills needed to understand chemistry are the same ones needed to code.
-        Logical reasoning and critical thinking. These are skills that are needed for problem solving and
+        Logical reasoning and critical thinking. Both are needed for problem solving and
         have translated well into my coding.</p>
         <br/>
         <blockquote className='blockquote'>

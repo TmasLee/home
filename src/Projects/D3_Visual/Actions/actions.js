@@ -78,7 +78,7 @@ function _parseData(data, dispatch){
 
           leadingCauses[`${data[i]['leading_cause']}`] = {};
           leadingCauses[`${data[i]['leading_cause']}`]['total'] = 0;
-          leadingCauses[`${data[i]['leading_cause']}`]['name'] = '';
+          leadingCauses[`${data[i]['leading_cause']}`]['name'] = 'z';
         }
       } else {
         deathsByYear[`${data[i]['year']}`] = {};
@@ -91,10 +91,8 @@ function _parseData(data, dispatch){
   }
   // Add a total button 
   yearsBtnArr.push('Total');
-  
-  console.log(deathsByYear);
-  console.log(leadingCauses);
-
+  // console.log(deathsByYear);
+  // console.log(leadingCauses);
   dispatch({
     type: 'PARSE_COMPLETE',
     deathsByYear: deathsByYear,
@@ -122,5 +120,51 @@ export function changeCurrentYear(newYearData){
   return {
     type: 'CHANGE_CURRENT_YEAR',
     currentYearData: newYearData
+  }
+}
+
+export function cacheNewData(year, leadingCausesDeathTotal, deathsByYear){
+  let cachedData;
+  for (var cause in deathsByYear[`${year}`]){
+    leadingCausesDeathTotal[cause]['total'] = 0;
+    // eslint-disable-next-line
+    Object.values(deathsByYear[`${year}`][`${cause}`]).forEach((deathsByRace)=>{
+      let deaths = parseInt(deathsByRace['deaths'], 10);
+      if (Number.isInteger(deaths)){
+        leadingCausesDeathTotal[cause]['total'] += deaths;
+      };
+    })
+    leadingCausesDeathTotal[cause]['name'] = cause;
+  };
+  cachedData = Object.values(leadingCausesDeathTotal);
+  localStorage.setItem(`year${year}Data`, JSON.stringify(cachedData));
+
+  return {
+    type: 'CACHE_NEW_DATA',
+    currentYearData: cachedData
+  }
+}
+
+export function cacheTotalData(leadingCausesDeathTotal, deathsByYear){
+  let cachedData;
+  for (var year in deathsByYear){
+    for (var cause in leadingCausesDeathTotal){
+      leadingCausesDeathTotal[cause]['name'] = cause; 
+      for (var index in deathsByYear[`${year}`][`${cause}`]){
+        let deaths = parseInt(deathsByYear[`${year}`][`${cause}`][`${index}`]['deaths'], 10);
+        // Check if deathsByYear[`${year}`][`${cause}`][`${index}`]['deaths'] is a number bc there are some '.'
+        if (Number.isInteger(deaths)){
+          //Parse string to integer and add to total
+          leadingCausesDeathTotal[cause]['total'] += deaths;
+        }
+      }
+    }
+  }
+  cachedData = Object.values(leadingCausesDeathTotal);
+  localStorage.setItem('totalDataObj', JSON.stringify(this.data));
+
+  return {
+    type: 'CACHE_TOTAL_DATA',
+    currentYearData: cachedData
   }
 }

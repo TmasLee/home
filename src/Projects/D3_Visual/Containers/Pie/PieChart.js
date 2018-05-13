@@ -7,12 +7,8 @@ import Slice from './Slice';
 export default class Pie extends Component{
   constructor(props){
     super(props);
-    this.state = {
-      // displayCenterData: false
-    };
 
     this.colorScale = d3.scaleOrdinal(d3.schemeCategory10);
-    this.renderSlice = this.renderSlice.bind(this);
     this.translate = `translate(${this.props.width/2}, ${this.props.height/2})`;
     this.deathTotal = this.getTotalDeaths(this.props.data);
 
@@ -21,7 +17,6 @@ export default class Pie extends Component{
   componentWillReceiveProps(nextProps){
     if (nextProps.data !== this.props.data){
       this.deathTotal = this.getTotalDeaths(nextProps.data);
-      console.log(this.deathTotal);
     }
   }
 
@@ -33,7 +28,7 @@ export default class Pie extends Component{
     return count;
   }
 
-  renderSlice(d, i){
+  renderSlice = (d, i) => {
     return (
       <Slice key={i}
             data={d}
@@ -44,11 +39,6 @@ export default class Pie extends Component{
             onMouseOver={this.updateCenterData}/>
           )
         }
-
-  updateCenterData(e){
-    e.preventDefault();
-    console.log('over slice')
-  }
 
   render(){
     let {data} = this.props;
@@ -73,7 +63,3 @@ const pieStyles = {
   outerRadius: 280,
   innerRadius: 110,
 }
-
-// zoom in function 
-// Hover on slice Center of pie--> total deaths in 8 years 
-// Clean up code --> messy components due to ever shifting plans --> should use cache to save data
