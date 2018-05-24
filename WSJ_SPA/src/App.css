@@ -1,0 +1,268 @@
+.App {
+  text-align: center;
+  position: relative;
+}
+body{
+  min-width: 1280px;
+  /* max-width: 1300px; */
+}
+.App-header {
+  background-color: #222;
+  height: 25px;
+  padding: 10px;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.logo{
+  position: relative;
+  top: 15px;
+  height: 50%;
+  width: 50%;
+}
+
+.subscribe_header{
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  bottom: 11px;
+} 
+
+.subscribe_header .bundle{
+  display: flex;
+}
+
+.subscribe_header .link{
+  color: rgb(177, 177, 177);
+  text-decoration: none;
+}
+
+.subscribe_now_link{
+  padding-right: 10px;
+}
+
+.subscribe_now_link .sub_modal_content{
+  display: inline;
+} .sub_modal_content .content{
+  color: black;
+  padding:20px;
+  list-style-type: none;
+}
+
+.sign_in_link{
+  padding-left: 10px;
+}
+
+.sign_in_link .signin_modal_content{
+  display: flex;
+
+} .signin_modal_content .columns{
+  justify-content: center;
+  padding: 20px;
+  
+}.signin_modal_content .content{
+  color: black;
+  list-style-type: none; 
+}
+
+.logo_header{
+  display: flex;
+  justify-content: center;
+  padding-top: 15px;
+}
+
+.logo_header-item{
+  font-size: 13px; 
+  padding: 5px;
+} 
+
+.edition_dropdown-content{
+  display: none;
+  position: absolute;
+  margin-right: 50px;
+  background-color: rgb(187, 187, 187);
+  min-width: 150px;
+  min-height: 20px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.logo_header-item .down-caret {
+  border-style: solid;
+  border-width: 4px 4px 0 4px;
+  border-color: black transparent transparent transparent;
+  display: inline-block;
+  margin-left: 5px;
+  top: -3px;
+  position: relative;
+}
+
+.edition_dropdown:hover .edition_dropdown-content{
+  display: block;
+} .content{
+  margin-top: 2px;
+}
+
+.logo_header-item .link{
+  color: rgb(95, 95, 95);
+  text-decoration: none;
+}
+
+.topics_nav{
+  display: inline-flex;
+  padding: 10px;
+}
+
+.topics_nav-item{
+  font-size: 20px; 
+  padding: 5px;
+}
+
+.nav-link{
+  color: rgb(95, 95, 95);
+  text-decoration: none;
+}
+.nav-link:hover{
+  color: rgb(168, 49, 49);
+}
+
+.search_btn{
+  display: block;
+  position: relative;
+  height: 100%;
+  margin-right: 30px;
+  top: 10px;
+  left: 15px;
+}
+
+.nav-item{
+  font-family: 'Oswald', sans-serif;
+  font-size: 15px;
+}
+
+.dj_dropdown{
+  position: relative;
+  display: inline-block;
+}
+.dj_dropdown .link{
+  font-size: 14px;
+}
+.about_newscorp{
+  font-size: 12px;
+  padding: 10px;
+  text-align: left;
+  color: rgb(68, 68, 68);
+}
+
+.dj_columns{
+  list-style-type: none;
+  columns: 2;
+}
+
+.newscorp_columns{
+  list-style-type: none;
+  columns: 2;
+}
+
+.company_columns{
+  display: flex;
+}
+.company_columns .company{
+  color: rgb(68, 68, 68);
+  font-weight: bold;
+}
+
+.company_columns .link{
+  color: rgb(68, 68, 68);
+  text-decoration: none;
+}
+
+.company_columns .link:hover{
+  color: rgb(110, 110, 110);
+}
+
+.dropdown-content{
+  display: none;
+  position: absolute;
+  background-color: rgb(187, 187, 187);
+  min-width: 600px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dj_dropdown:hover .dropdown-content{
+  display: block;
+}
+
+.down-caret {
+  border-style: solid;
+  border-width: 4px 4px 0 4px;
+  border-color: #ffffff transparent transparent transparent;
+  display: inline-block;
+  margin-left: 5px;
+  top: -3px;
+  position: relative;
+}
+
+.stock_dropdown{
+  position: relative;
+  display: inline-flex;
+  width: 700px;
+  white-space: nowrap;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.info_scroll {
+  display: inline-flex;
+  animation: marquee 20s linear infinite;
+} .info_scroll a{
+  position: relative;
+  width: 100%;
+  padding-left: 10px;
+} .info_scroll_item{
+  display: flex;
+} 
+.index_points{
+  font-weight: bold; 
+  color:rgb(255, 255, 255);
+  margin:1px;
+} .index_name{
+  color:rgb(255, 255, 255); 
+  margin: 1px;
+}.index_delta_neg{
+  color: red;
+  margin: 1px;
+} .index_delta_pos{
+  color: green;
+  margin: 1px;
+}
+@keyframes marquee {
+  0%   { transform: translate(0, 0); }
+  100% { transform: translate(-100%, 0); }
+}
+
+.header_line{
+  position: absolute;
+  display: block;
+  margin-left: auto;
+  margin-right:auto;
+  width: 100%;
+}
+
+.home .columns{
+  list-style-type: none;
+  display: flex;
+  columns: 2;
+}
+ /* .Popular{
+
+} .Trending{
+
+} .col1{
+
+} .col2{
+
+} */
