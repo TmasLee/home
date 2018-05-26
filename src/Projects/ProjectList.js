@@ -3,6 +3,7 @@ import Snake from './Snake/SnakeGame';
 import Background from './ColorShift/Background';
 import D3_App from './ReduxApp/D3_App';
 import D3_App_2 from './D3_Visual/D3_App_2';
+import main from './MyWSJ/main';
 
 var projects = [
   {
@@ -34,6 +35,12 @@ var projects = [
     'name' : 'Another D3 Visualization',
     'topics' : 'D3, Redux, API calling, Caching',
     'description' : 'Another data visual. Redux isn\'t needed in these apps as the data isn\'t being shared by a lot of different components. In fact it would probably be easier to implement these apps without Redux but I opted to use Redux for practice. Also another thing learned: planning is very important if you don\'t want spaghetti. A definitive end product/functionality should be defined otherwise components end up being improv\'ed upon. As my applications are getting more complex it\'s become clear that planning is a major part of software development.' 
+  },
+  {
+    'project': main,
+    'name': 'My Wall Street Journal',
+    'topics': 'React, Redux, CSS, HTML',
+    'description': 'Something a little different, this time I made a functioning website (my take on the WSJ page). I realized that I had neglected the visual aspect of front end development so I took it upon myself to work on my designing capabilities while utilizing my programming knowledge! The site is not yet complete, however I will be continually adding more to it! So much to do!'
   }
 ];
 
