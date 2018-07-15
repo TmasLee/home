@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class main extends Component {
+class Macros extends Component {
   render() {
     return (
       <div>
@@ -10,5 +10,5 @@ class main extends Component {
   }
 }
 
-export default main;
+export default Macros;
 
