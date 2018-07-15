@@ -4,7 +4,11 @@ import Background from './ColorShift/Background';
 import D3_App from './ReduxApp/D3_App';
 import D3_App_2 from './D3_Visual/D3_App_2';
 import main from './MyWSJ/main';
+<<<<<<< HEAD
 import Macros from './Macros/Macros';
+=======
+import Macros from './Macros/macros';
+>>>>>>> 452265c4a5ab0835022db9e44744e0c61a8e6249
 
 var projects = [
   {
@@ -60,7 +64,11 @@ var projects = [
       styling capabilities.'
   },
   {
+<<<<<<< HEAD
     'project': Macros,
+=======
+    'project': macros,
+>>>>>>> 452265c4a5ab0835022db9e44744e0c61a8e6249
     'name': 'Macros Tracker',
     'topics': 'SSR, AWS, React, Redux, Node, Express, MySQL, Babel, webpack, CRUD, CORS',
     'description': 
