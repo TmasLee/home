@@ -10,8 +10,8 @@ class About extends Component {
           <img src={require('./images/mask.JPG')} alt='mask' className='rounded-circle'/>
         </div>
         <br/><br/>
-        <p>Having graduated in December 2017 with a Bachelor's Degree in Chemistry, I spent the last 
-        two years learning Javascript and improving my abilities as a developer. While experimenting with
+        <p>Having graduated in December 2017 with a B.S. in Chemistry, I spent the last year and a
+        half learning Javascript and improving my abilities as a fullstack developer. While experimenting with
         different libraries I've created small apps and sites for myself to apply concepts I've learned.
         These days I am focusing on React!
         </p>
