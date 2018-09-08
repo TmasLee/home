@@ -4,7 +4,8 @@ import Background from './ColorShift/Background';
 import D3_App from './ReduxApp/D3_App';
 import D3_App_2 from './D3_Visual/D3_App_2';
 import main from './MyWSJ/main';
-import Macros from './Macros/Macros';
+import Macros from './Macros/macros';
+import ShoppingCart from './Shopping-Cart/ShoppingCart';
 
 var projects = [
   {
@@ -70,6 +71,20 @@ var projects = [
       stored in a MySQL database. The most challenging aspect of this project was learning about and searching for a suitable \
       environment to host a SSR app. Another interesting challenge was configuring the AWS EC2 instance to accept \
       non-simple CORS request from outside domains.'
+  },
+  {
+    'project': ShoppingCart,
+    'name': 'Shopping Cart Mock-up',
+    'topics': 'React, HTML, CSS, Form, Online Shopping Cart, Responsive UI',
+    'description': 
+      'An online shopping cart mock-up that is responsive. The UI is hand coded in HTML and CSS. \
+      Everything is made with react components. The actual list of items was coded with an HTML table\
+      which is not ideal. But for this particular challenge I was unsure if the usage of other libraries, \
+      like Bootstrap, was allowed. This limited how freely I could interact with the components. Due to this and \
+      my attempt of limiting the number of states/stateful components I designed my self into a corner. I ended \
+      up having to handle the logic of the item modal in the item and main app component. If I were to \
+      redo this app, I would use Bootstrap\'s grid, flex, or table system and implement the item modal as a form.\
+      It would be stateful and I could deal with the updating logic in the same component that the modal renders from.'
   }
 ];
 
