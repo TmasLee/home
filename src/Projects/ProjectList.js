@@ -4,7 +4,7 @@ import Background from './ColorShift/Background';
 import D3_App from './ReduxApp/D3_App';
 import D3_App_2 from './D3_Visual/D3_App_2';
 import main from './MyWSJ/main';
-import Macros from './Macros/macros';
+import Macros from './Macros/MacroTracker';
 import ShoppingCart from './Shopping-Cart/ShoppingCart';
 
 var projects = [
