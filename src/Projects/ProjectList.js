@@ -6,6 +6,7 @@ import D3_App_2 from './D3_Visual/D3_App_2';
 import main from './MyWSJ/main';
 import Macros from './Macros/MacroTracker';
 import ShoppingCart from './Shopping-Cart/ShoppingCart';
+import BootstrapShoppingCart from './Bootstrap-Shopping-Cart/BootstrapShoppingCart';
 
 var projects = [
   {
@@ -85,6 +86,16 @@ var projects = [
       up having to handle the logic of the item modal in the item and main app component. If I were to \
       redo this app, I would use Bootstrap\'s grid, flex, or table system and implement the item modal as a form.\
       It would be stateful and I could deal with the updating logic in the same component that the modal renders from.'
+  },
+  {
+    'project': BootstrapShoppingCart,
+    'name': 'Shopping Cart Mock-up with Bootstrap Update',
+    'topics': 'React, HTML, CSS, Bootstrap, Form, Online Shopping Cart, Responsive UI',
+    'description': 
+      'Another shopping cart mock-up with a similar layout as my last project. This time, however, I updated \
+      it with the changes I wanted to make. I replaced the HTML table format with Bootstrap/CSS3 grids. I also\
+      updated the modal component to make it stateful. This implementation feels a lot cleaner logic and \
+      HTML/CSS-wise.'
   }
 ];
 
